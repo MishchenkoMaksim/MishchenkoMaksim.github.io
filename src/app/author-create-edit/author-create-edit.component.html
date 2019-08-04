@@ -1,0 +1,37 @@
+<div class="container">
+
+    <h2 class="text-dark" [hidden]='bool'>Вы собираетесь отредактировать автора: {{currentAuthor?.firstName}} {{currentAuthor?.lastName}} {{currentAuthor?.middleName}}</h2>
+    <h4 [hidden]='!bool' class="text-dark">Для того чтобы добавить автора, нужно заполнить все формы и нажать "Сохранить"</h4>
+
+    <form [formGroup]="authorForm" (ngSubmit)="onSubmit(authorForm)">
+        <div class="formGroup">
+            <label for="firstName">Имя</label>
+            <input id="firstName" class="form-control" type="text" formControlName="firstName" name="firstName">
+            <div *ngIf="checkError('firstName', 'required')" class="alert alert-danger">Обязательное поле.</div>
+            <div *ngIf="checkError('firstName', 'pattern')" class="alert alert-danger">Только русскоязычные буквы.</div>
+        </div>
+
+        <div class="formGroup">
+            <label for="lastName">Фамилия</label>
+            <input id="lastName" class="form-control" type="text" formControlName="lastName">
+            <div *ngIf="checkError('lastName', 'required')" class="alert alert-danger">Обязательное поле.</div>
+            <div *ngIf="checkError('lastName', 'pattern')" class="alert alert-danger">Только русскоязычные буквы.</div>
+        </div>
+
+        <div class="formGroup">
+            <label for="middleName">Отчество</label>
+            <input id="middleName" class="form-control" type="text" formControlName="middleName">
+            <div *ngIf="checkError('middleName', 'required')" class="alert alert-danger">Обязательное поле.</div>
+            <div *ngIf="checkError('middleName', 'pattern')" class="alert alert-danger">Только русскоязычные буквы.</div>
+        </div>
+
+        <div class="formGroup">
+            <label for="dateOfBirth">Дата Рождения</label>
+            <input id="dateOfBirth" class="form-control" type="text" formControlName="dateOfBirth">
+            <div *ngIf="checkError('dateOfBirth', 'required')" class="alert alert-danger">Обязательное поле.</div>
+            <div *ngIf="checkError('dateOfBirth', 'pattern')" class="alert alert-danger">Дата должна быть в формате ДД.ММ.ГГГГ.</div>
+        </div>
+        <input type="submit" class="btn btn-dark mt-3 delete" value="Сохранить" [disabled]="authorForm.invalid" />
+        <button type="button" class="btn btn-dark mt-3 ml-1 delete" (click)='goBack()'>Отмена</button>
+    </form>
+</div>

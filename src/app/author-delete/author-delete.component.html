@@ -1,0 +1,6 @@
+<div class="container col-md-8 offset-md-3 text-dark">
+    <h2>Вы хотите удалить автора: {{currentAuthor?.firstName}} {{currentAuthor?.lastName}} {{currentAuthor?.middleName}}?</h2>
+
+    <button class="btn btn-dark delete" (click)="deleteAuthor()">Удалить</button>
+    <button class="btn btn-dark ml-2 delete" (click)="goBack()">Отмена</button>
+</div>

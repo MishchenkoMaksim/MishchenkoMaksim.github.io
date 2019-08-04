@@ -1,0 +1,24 @@
+<div class="container col-md-6">
+    <h3 class="text-dark">Чтобы добавить жанр, введите жанр и нажмите "Добавить"</h3>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th (click)="sortGenre()">Жанр</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let g of genres">
+                <td>{{g.genre}}</td>
+                <td><button (click)="deleteGenre(g)" class="btn btn-secondary delete">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p [hidden]="bool" class="alert alert-danger">Название жанра может быть только на русском языке и не может включать в себя цифры. 
+        Проверьте правильность написания.</p>
+    <input type="text" #genreVal placeholder="Введите жанр" class="form-control bg-dark text-white" [(ngModel)]="genreName" required>
+    <button class="btn btn-dark mt-1 mb-3" (click)="addGenre(genreVal.value)">Добавить жанр</button>
+    <button (click)="goBack()" class="btn btn-dark mt-1 ml-2 mb-3">Вернуться назад</button>
+</div>

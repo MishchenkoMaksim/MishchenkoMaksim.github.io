@@ -1,0 +1,39 @@
+<div class="container">
+
+    <h3>Вы собираетесь отредактировать книгу: {{currentBook?.bookName}}</h3>
+
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit(bookForm)">
+        <div class="formGroup">
+            <label for="bookName">Название книги</label>
+            <input id="bookName" class="form-control" type="text" formControlName="bookName" name="bookName">
+            <div *ngIf="checkError('bookName', 'required')" class="alert alert-danger">Обязательное поле.</div>
+        </div>
+
+        <div class="formGroup">
+            <label for="numOfPages">Количество страниц</label>
+            <input id="numOfPages" class="form-control" type="text" formControlName="numOfPages">
+            <div *ngIf="checkError('numOfPages', 'required')" class="alert alert-danger">Обязательное поле.</div>
+            <div *ngIf="checkError('numOfPages', 'pattern')" class="alert alert-danger">Это поле может включать в себя только цифры и числа.</div>
+        </div>
+
+        <div class="formGroup">
+            <label for="genre">Жанр</label>
+            <input id="genre" type="text" class="form-control" formControlName="genre">
+            <div *ngIf="checkError('genre', 'required')" class="alert alert-danger">Обязательное поле.</div>
+        </div>
+
+        <div [hidden]='bool'>
+            <p class="alert alert-danger">Вы можете добавить только тот жанр, который есть в списке доступных.</p>
+        </div>
+
+        <input type="submit" class="btn btn-dark mt-2 delete" value="Сохранить" [disabled]="bookForm.invalid" />
+        <button type="button" (click)='goBack()' class="btn btn-dark ml-2 mt-2 delete" >Отмена</button>
+    </form>
+
+    <div class="text-muted">
+        <p class="d-inline">Доступные жанры: </p> 
+        <div *ngFor="let i of genres" class="d-inline">
+            <span><b>"{{i.genre}}" </b></span>
+        </div>
+    </div>
+</div>

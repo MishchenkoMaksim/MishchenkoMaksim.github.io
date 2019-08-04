@@ -1,0 +1,13 @@
+{
+	"type": "Collection",
+	"properties": {
+		"genre": {
+			"name": "genre",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "genre",
+			"order": 0
+		}
+	}
+}

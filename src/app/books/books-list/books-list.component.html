@@ -1,0 +1,67 @@
+<div class="container p-0 col-12 col-lg-10 col-md-12">
+    <h2 class="text-dark">Автор книг: {{author?.firstName}} {{author?.lastName}} {{author?.middleName}}</h2>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th (click)="sortBName()">Название книги</th>
+                <th (click)="sortNumOfPages()">Количество страниц</th>
+                <th (click)="sortGenreInTable()">Жанр</th>
+                <th>Рeдактировать</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let book of books">
+                <td *ngIf="book.id2 == id">{{book.bookName}}</td>
+                <td *ngIf="book.id2 == id">{{book.numOfPages}}</td>
+                <td *ngIf="book.id2 == id">{{book.genre}}</td>
+                <td *ngIf="book.id2 == id"><button type="button" class="btn btn-secondary" *ngIf="book.id2 == id" (click)="editBook(book)">Редактировать</button></td>
+                <td *ngIf="book.id2 == id"><button type="button" class="btn btn-secondary delete" *ngIf="book.id2 == id" (click)="deleteBook(book)">Удалить</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+        <h2 class="text-center text-dark">Форма для добавления книги</h2>
+</div>
+
+<div class="container bg-dark text-white mb-5 col-12 col-lg-10 col-md-12">
+        <div class="row">
+          <div class="col  border-right">
+                <h3 class="text-center" (click)="sortGenre()">Доступные жанры</h3>
+
+                <ul class="list-group mt-3">
+                    <li *ngFor="let genre of genres" class="list-group-item list-group-item-action list-group-item-dark">{{genre.genre}}</li>
+                </ul>
+
+                <p class="text-danger mt-2">Чтобы отредактировать список жанров, нажмите "Список жанров"</p>
+                <button (click)="editGenres()" class="btn btn-secondary mt-2 mb-2">Список жанров</button>
+          </div>
+
+          <div class="col">
+              <h5>Чтобы добавить книгу, заполните формы и нажмите "Добавить"</h5>
+                <form [formGroup]='addBookForm' (ngSubmit)="onSubmit(addBookForm)">
+                    <label for="bookName">Название книги</label>
+                    <input type="text" id="bookName" class="form-control" placeholder="Название книги" formControlName="bookName" name="bookName" >
+                    <div *ngIf="checkError('bookName', 'required')" class="alert alert-danger">Обязательное поле.</div>
+
+                    <label for="numOfPages">Количество страниц</label>
+                    <input type="text" id="numOfPages" placeholder="Количество страниц" class="form-control" formControlName="numOfPages" name="numOfPages">
+                    <div *ngIf="checkError('numOfPages', 'required')" class="alert alert-danger">Обязательное поле.</div>
+                    <div *ngIf="checkError('numOfPages', 'pattern')" class="alert alert-danger">Это поле может включать в себя только цифры и числа.</div>
+
+                    <label for="genre">Жанр</label>
+                    <input id="genre" type="text" placeholder="Жанр" class="form-control" formControlName="genre" name="genre">
+                    <div *ngIf="checkError('genre', 'required')" class="alert alert-danger">Обязательное поле.</div>
+
+                    <button type="submit" [disabled]='addBookForm.invalid' class="btn btn-secondary mt-2">Добавить</button>
+
+                    <p [hidden]='bool' class="alert alert-danger mt-2">Вы можете добавить только тот жанр, который есть в списке доступных.</p>
+                </form>
+          </div>
+          <div class="w-100"></div>
+        </div>
+      </div>
+
